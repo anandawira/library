@@ -21,19 +21,23 @@ function renderTable() {
     const tdElem = document.createElement("td");
     const trElem = document.createElement("tr");
 
-    const propertyName = ["title", "author", "pages", "isRead"];
+    const propertyName = ["title", "author", "pages"];
     propertyName.forEach((property) => {
       // for each property, make a td element and append to the tr element
       tdElem.textContent = book[property];
       trElem.appendChild(tdElem.cloneNode(true));
     });
 
+    tdElem.textContent = book["isRead"] ? "Read" : "Not Read";
+    trElem.appendChild(tdElem.cloneNode(true));
+
     // creating the delete button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("data-index", idx);
-    deleteButton.classList.add("btn", "btn-danger", "btn-sm");
+    deleteButton.setAttribute("onclick", `deleteBook(${idx})`);
+    deleteButton.classList.add("btn", "btn-danger", "btn-sm", "delete-btn");
 
     // inserting the delete button to the td element
     tdElem.innerHTML = "";
@@ -47,5 +51,10 @@ function renderTable() {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
+  renderTable();
+}
+
+function deleteBook(index) {
+  myLibrary.splice(index, 1);
   renderTable();
 }
