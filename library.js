@@ -1,4 +1,7 @@
-let myLibrary = [];
+const tableDOM = document.querySelector("tbody");
+
+const hobbit = new Book("The Hobbit", "Tolkien", 500, true);
+const ring = new Book("The ring", "Ananda", 300, false);
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -12,5 +15,18 @@ function Book(title, author, pages, isRead) {
   };
 }
 
-function addBookToLibrary() {
-}
+let myLibrary = [hobbit, ring];
+
+myLibrary.forEach((book) => {
+  const tdElem = document.createElement("td");
+  const trElem = document.createElement("tr");
+
+  const propertyName = ["title", "author", "pages", "isRead"];
+  propertyName.forEach((property) => {
+    tdElem.textContent = book[property];
+    trElem.appendChild(tdElem.cloneNode(true));
+  });
+  tableDOM.appendChild(trElem);
+});
+
+function addBookToLibrary() {}
