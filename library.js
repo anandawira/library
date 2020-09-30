@@ -1,8 +1,6 @@
 const tableDOM = document.querySelector("tbody");
 
 // Add 2 initial books
-const hobbit = new Book("The Hobbit", "Tolkien", 500, true);
-const ring = new Book("The ring", "Ananda", 300, false);
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -11,7 +9,7 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-let myLibrary = [hobbit, ring];
+let myLibrary = [];
 
 function renderTable() {
   // reset table
@@ -31,17 +29,24 @@ function renderTable() {
     tdElem.textContent = book["isRead"] ? "Read" : "Not Read";
     trElem.appendChild(tdElem.cloneNode(true));
 
+    // creating the switch button
+    const switchButton = document.createElement("button");
+    switchButton.textContent = "Switch";
+    switchButton.setAttribute("type", "button");
+    switchButton.setAttribute("onclick", `switchStatus(${idx})`);
+    switchButton.classList.add("btn", "btn-primary", "btn-sm", "mr-2");
+
     // creating the delete button
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.setAttribute("type", "button");
-    deleteButton.setAttribute("data-index", idx);
     deleteButton.setAttribute("onclick", `deleteBook(${idx})`);
-    deleteButton.classList.add("btn", "btn-danger", "btn-sm", "delete-btn");
+    deleteButton.classList.add("btn", "btn-danger", "btn-sm");
 
     // inserting the delete button to the td element
     tdElem.innerHTML = "";
     tdElem.classList.add("text-center");
+    tdElem.appendChild(switchButton);
     tdElem.appendChild(deleteButton);
     trElem.appendChild(tdElem);
     tableDOM.appendChild(trElem);
@@ -56,5 +61,10 @@ function addBookToLibrary(title, author, pages, isRead) {
 
 function deleteBook(index) {
   myLibrary.splice(index, 1);
+  renderTable();
+}
+
+function switchStatus(index) {
+  myLibrary[index].isRead = !myLibrary[index].isRead;
   renderTable();
 }
