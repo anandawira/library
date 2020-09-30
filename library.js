@@ -17,16 +17,23 @@ function Book(title, author, pages, isRead) {
 
 let myLibrary = [hobbit, ring];
 
-myLibrary.forEach((book) => {
-  const tdElem = document.createElement("td");
-  const trElem = document.createElement("tr");
+function renderTable() {
+  tableDOM.innerHTML = "";
+  myLibrary.forEach((book) => {
+    const tdElem = document.createElement("td");
+    const trElem = document.createElement("tr");
 
-  const propertyName = ["title", "author", "pages", "isRead"];
-  propertyName.forEach((property) => {
-    tdElem.textContent = book[property];
-    trElem.appendChild(tdElem.cloneNode(true));
+    const propertyName = ["title", "author", "pages", "isRead"];
+    propertyName.forEach((property) => {
+      tdElem.textContent = book[property];
+      trElem.appendChild(tdElem.cloneNode(true));
+    });
+    tableDOM.appendChild(trElem);
   });
-  tableDOM.appendChild(trElem);
-});
+}
 
-function addBookToLibrary() {}
+function addBookToLibrary(title, author, pages, isRead) {
+  const newBook = new Book(title, author, pages, isRead);
+  myLibrary.push(newBook);
+  renderTable();
+}
