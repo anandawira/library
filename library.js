@@ -1,6 +1,11 @@
 const tableDOM = document.querySelector("tbody");
 
 // Add 2 initial books
+window.onload = function() {
+  addBookToLibrary("Cloud Atlas", "David Mitchell", "544", 1);
+  addBookToLibrary("World War Z", "Max Brooks", "342", 0);
+};
+
 
 function Book(title, author, pages, isRead) {
   this.title = title;
