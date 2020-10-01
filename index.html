@@ -61,29 +61,29 @@
       </table>
     </div>
   </main>
+  <script src="./library.js"></script>
+  <script>
+    renderTable();
+    const form = document.getElementById("newForm");
+    form.addEventListener("submit", handleForm);
+
+    function handleForm(event) {
+      // prevent the page from refreshing when the button pressed
+      event.preventDefault();
+
+      // get the values from form
+      const title = document.querySelector("#titleInput").value;
+      const author = document.querySelector("#authorInput").value;
+      const pages = Number(document.querySelector("#pagesInput").value);
+      const isRead = document.querySelector("#isReadInput").checked;
+
+      // reset the form field
+      this.reset();
+
+      // add the book to the library
+      addBookToLibrary(title, author, pages, isRead);
+    }
+  </script>
 </body>
-<script src="./library.js"></script>
-<script>
-  renderTable();
-  const form = document.getElementById("newForm");
-  form.addEventListener("submit", handleForm);
-
-  function handleForm(event) {
-    // prevent the page from refreshing when the button pressed
-    event.preventDefault();
-
-    // get the values from form
-    const title = document.querySelector("#titleInput").value;
-    const author = document.querySelector("#authorInput").value;
-    const pages = Number(document.querySelector("#pagesInput").value);
-    const isRead = document.querySelector("#isReadInput").checked;
-
-    // reset the form field
-    this.reset();
-
-    // add the book to the library
-    addBookToLibrary(title, author, pages, isRead);
-  }
-</script>
 
 </html>
