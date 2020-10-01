@@ -1,7 +1,8 @@
+// jshint esversion:6
 const tableDOM = document.querySelector("tbody");
 
 // Add 2 initial books
-window.onload = function() {
+window.onload = function () {
   addBookToLibrary("Cloud Atlas", "David Mitchell", "544", 1);
   addBookToLibrary("World War Z", "Max Brooks", "342", 0);
 };
