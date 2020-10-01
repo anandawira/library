@@ -44,8 +44,12 @@ function renderTable() {
 
     // creating the delete button
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    
+    // Added fontawesome delete icon
+    deleteButton.innerHTML = "<i class='fa fa-trash-alt'>"; 
+    deleteButton.style.fontSize = "15px";
     deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("title", "Delete");
     deleteButton.setAttribute("onclick", `deleteBook(${idx})`);
     deleteButton.classList.add("btn", "btn-danger", "btn-sm");
 
