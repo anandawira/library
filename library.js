@@ -1,7 +1,8 @@
+// jshint esversion:6
 const tableDOM = document.querySelector("tbody");
 
 // Add 2 initial books
-window.onload = function() {
+window.onload = function () {
   addBookToLibrary("Cloud Atlas", "David Mitchell", "544", 1);
   addBookToLibrary("World War Z", "Max Brooks", "342", 0);
 };
@@ -47,8 +48,12 @@ function renderTable() {
 
     // creating the delete button
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    
+    // Added fontawesome delete icon
+    deleteButton.innerHTML = "<i class='fa fa-trash-alt'>"; 
+    deleteButton.style.fontSize = "15px";
     deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("title", "Delete");
     deleteButton.setAttribute("onclick", `deleteBook(${idx})`);
     deleteButton.classList.add("btn", "btn-danger", "btn-sm");
 
