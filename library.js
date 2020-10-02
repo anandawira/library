@@ -7,7 +7,6 @@ window.onload = function () {
   addBookToLibrary("World War Z", "Max Brooks", "342", 0);
 };
 
-
 function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
@@ -75,9 +74,22 @@ function addBookToLibrary(title, author, pages, isRead) {
 }
 
 function deleteBook(index) {
-  const removedBook = myLibrary.splice(index, 1)[0];
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const removedBook = myLibrary.splice(index, 1)[0];
   myCompleteLibrary.delete(removedBook);
   renderTable();
+      Swal.fire("Deleted!", "Your book has been deleted.", "success");
+    }
+  });
 }
 
 function switchStatus(index) {
