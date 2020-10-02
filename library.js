@@ -14,7 +14,11 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+let myCompleteLibrary = new Set();
 let myLibrary = [];
+let filters = {
+  onlyRead: false
+}
 
 function renderTable() {
   // reset table
@@ -61,11 +65,13 @@ function renderTable() {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
+  myCompleteLibrary.add(newBook);
   renderTable();
 }
 
 function deleteBook(index) {
-  myLibrary.splice(index, 1);
+  const removedBook = myLibrary.splice(index, 1)[0];
+  myCompleteLibrary.delete(removedBook);
   renderTable();
 }
 
@@ -73,3 +79,28 @@ function switchStatus(index) {
   myLibrary[index].isRead = !myLibrary[index].isRead;
   renderTable();
 }
+
+
+function filterStatus(status) {
+  filters.onlyRead = !filters.onlyRead;
+  applyFilters();
+}
+
+function applyFilters() {
+  const myNewLibrary = [];
+  for (const item of myCompleteLibrary) {
+    if (filters.onlyRead && !item.isRead) {
+      continue;
+    }
+
+    myNewLibrary.push(item);
+  }
+
+  myLibrary = myNewLibrary;
+  renderTable();
+}
+
+
+// register events
+const onlyReadBooksCheckbox = document.getElementById("onlyReadBooks");
+onlyReadBooksCheckbox.addEventListener("change", filterStatus);
