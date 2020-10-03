@@ -17,8 +17,8 @@ function Book(title, author, pages, isRead) {
 let myCompleteLibrary = new Set();
 let myLibrary = [];
 let filters = {
-  onlyRead: false
-}
+  onlyRead: false,
+};
 
 function renderTable() {
   // reset table
@@ -47,9 +47,9 @@ function renderTable() {
 
     // creating the delete button
     const deleteButton = document.createElement("button");
-    
+
     // Added fontawesome delete icon
-    deleteButton.innerHTML = "<i class='fa fa-trash-alt'>"; 
+    deleteButton.innerHTML = "<i class='fa fa-trash-alt'>";
     deleteButton.style.fontSize = "15px";
     deleteButton.setAttribute("type", "button");
     deleteButton.setAttribute("title", "Delete");
@@ -81,12 +81,12 @@ function deleteBook(index) {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!"
+    confirmButtonText: "Yes, delete it!",
   }).then((result) => {
     if (result.isConfirmed) {
       const removedBook = myLibrary.splice(index, 1)[0];
-  myCompleteLibrary.delete(removedBook);
-  renderTable();
+      myCompleteLibrary.delete(removedBook);
+      renderTable();
       Swal.fire("Deleted!", "Your book has been deleted.", "success");
     }
   });
@@ -96,7 +96,6 @@ function switchStatus(index) {
   myLibrary[index].isRead = !myLibrary[index].isRead;
   renderTable();
 }
-
 
 function filterStatus(status) {
   filters.onlyRead = !filters.onlyRead;
@@ -116,7 +115,6 @@ function applyFilters() {
   myLibrary = myNewLibrary;
   renderTable();
 }
-
 
 // register events
 const onlyReadBooksCheckbox = document.getElementById("onlyReadBooks");
