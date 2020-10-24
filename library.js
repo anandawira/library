@@ -7,11 +7,20 @@ window.onload = function () {
   addBookToLibrary("World War Z", "Max Brooks", "342", 0);
 };
 
-function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+// function Book(title, author, pages, isRead) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.isRead = isRead;
+// }
+
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+  }
 }
 
 let myCompleteLibrary = new Set();
